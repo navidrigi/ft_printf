@@ -1,6 +1,6 @@
 CFILES		=	ft_printf.c utils_1.c utils_2.c
 CFLAGS		=	-Wall -Werror -Wextra
-OBJ		=	$(CFILES:.c=.o)
+OBJ			=	$(CFILES:.c=.o)
 NAME		=	libftprintf.a
 
 all: $(NAME)
