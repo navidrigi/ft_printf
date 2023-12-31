@@ -1,11 +1,15 @@
-CFILES		=	ft_printf.c utils_1.c utils_2.c
-CFLAGS		=	-Wall -Werror -Wextra
-OBJ			=	$(CFILES:.c=.o)
-NAME		=	libftprintf.a
+CFILES		=		ft_printf.c utils_1.c utils_2.c
+CFLAGS		=		-Wall -Werror -Wextra
+OBJDIR		=		obj
+OBJ			=		$(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
+NAME		=		libftprintf.a
 
-all: $(NAME)
+all: $(OBJDIR) $(NAME)
 
-%.o: %.c
+$(OBJDIR):
+	mkdir -p $@
+
+$(OBJDIR)/%.o: %.c
 	cc -c -o $@ $< $(CFLAGS)
 
 $(NAME): $(OBJ)
@@ -18,5 +22,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(OBJDIR)
 
 re: fclean all
