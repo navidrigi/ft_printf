@@ -36,13 +36,15 @@ void	ft_putstr(char *str, int *len)
 	}
 }
 
-void ft_putptr(void* ptr, int *len)
+void	ft_putptr(void *ptr, int *len)
 {
-	unsigned long num = (unsigned long)ptr;
-	const char *str = "0123456789abcdef";
-	char buffer[20];
-	int i = 18;
+	int				i;
+	unsigned long	num;
+	const char		*str = "0123456789abcdef";
+	char			buffer[20];
 
+	i = 18;
+	num = (unsigned long)ptr;
 	buffer[19] = '\0';
 	while (num != 0)
 	{

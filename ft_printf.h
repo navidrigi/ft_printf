@@ -15,6 +15,6 @@ void	ft_putstr(char *str, int *len);
 void	ft_puthex(int num, int *len);
 void	ft_putnbr(int num, int *len);
 void	ft_putnbr_u(unsigned int num, int *len);
-void    ft_putptr(void *ptr, int *len);
+void	ft_putptr(void *ptr, int *len);
 
 #endif
