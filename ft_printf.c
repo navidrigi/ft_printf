@@ -23,3 +23,14 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
+
+// int main()
+// {
+// 	char *str = "Hello, world!";
+// 	int num = 123;
+// 	int ret1 = printf("%s %x %p\n", str, num, str);
+// 	int ret2 = ft_printf("%s %x %p\n", str, num, str);
+// 	printf("printf_1: %d\n", ret1);
+// 	printf("printf_2: %d\n", ret2);
+// 	return (0);
+// }

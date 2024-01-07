@@ -1,5 +1,23 @@
 #include "ft_printf.h"
 
+void	arg_checking(char c, va_list args, int *len)
+{
+	if (c == 'c')
+		ft_putchar(va_arg(args, int), len);
+	else if (c == 's')
+		ft_putstr(va_arg(args, char *), len);
+	else if (c == 'p')
+		ft_putptr(va_arg(args, void *), len);
+	else if (c == 'd' || c == 'i')
+		ft_putnbr(va_arg(args, int), len);
+	else if (c == 'u')
+		ft_putnbr_u(va_arg(args, unsigned int), len);
+	else if (c == 'x' || c == 'X')
+		ft_puthex(va_arg(args, unsigned int), len);
+	else
+		ft_putchar('%', len);
+}
+
 void	ft_putchar(int c, int *len)
 {
 	write (1, &c, 1);
@@ -18,61 +36,31 @@ void	ft_putstr(char *str, int *len)
 	}
 }
 
+void ft_putptr(void* ptr, int *len)
+{
+	unsigned long num = (unsigned long)ptr;
+	const char *str = "0123456789abcdef";
+	char buffer[20];
+	int i = 18;
+
+	buffer[19] = '\0';
+	while (num != 0)
+	{
+		buffer[i] = str[num % 16];
+		num /= 16;
+		i--;
+	}
+	buffer[i] = 'x';
+	i--;
+	buffer[i] = '0';
+	ft_putstr(&buffer[i], len);
+}
+
 void	ft_puthex(int num, int *len)
 {
-	char	*str;
+	const char	*str = "0123456789abcdef";
 
-	str = ft_strdup("0123456789abcdef");
 	if (num > 15)
 		ft_puthex(num / 16, len);
-	ft_putnbr_u(num, len);
-	free(str);
+	ft_putchar(str[num % 16], len);
 }
-
-void	ft_putnbr(int num, int *len)
-{
-	char	c;
-
-	if (num == -2147483648)
-		ft_putstr("-2147483648", len);
-	else if (num < 0)
-	{
-		num = -num;
-		ft_putchar('-', len);
-		ft_putnbr(num, len);
-	}
-	else if (num > 9)
-	{
-		ft_putnbr(num / 10, len);
-		ft_putnbr(num % 10, len);
-	}
-	else
-	{
-		c = num + '0';
-		ft_putchar(c, len);
-	}
-}
-
-void	ft_putnbr_u(unsigned int num, int *len)
-{
-	char	c;
-
-	if (num > 9)
-	{
-		ft_putnbr_u(num / 10, len);
-		ft_putnbr_u(num % 10, len);
-	}
-	else
-	{
-		c = num + '0';
-		ft_putchar(c, len);
-	}
-}
-
-// int main()
-// {
-// 	unsigned int i = 3147483648;
-// 	int len = 0;
-// 	ft_putnbr_u(i, &len);
-// 	write (1, "\n", 1);
-// }

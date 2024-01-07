@@ -23,5 +23,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	rm -rf $(OBJDIR)
+	rm -f main
 
 re: fclean all

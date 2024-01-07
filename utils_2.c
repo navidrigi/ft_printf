@@ -1,41 +1,41 @@
 #include "ft_printf.h"
 
-void	arg_checking(char c, va_list args, int *len)
+void	ft_putnbr(int num, int *len)
 {
-	if (c == 'c')
-		ft_putchar(va_arg(args, int), len);
-	else if (c == 's')
-		ft_putstr(va_arg(args, char *), len);
-	else if (c == 'p')
-		ft_puthex((unsigned long)va_arg(args, void *), len);
-	else if (c == 'd' || c == 'i')
-		ft_putnbr(va_arg(args, int), len);
-	else if (c == 'u')
-		ft_putnbr_u(va_arg(args, unsigned int), len);
-	else if (c == 'x' || c == 'X')
-		ft_puthex(va_arg(args, unsigned int), len);
+	char	c;
+
+	if (num == -2147483648)
+		ft_putstr("-2147483648", len);
+	else if (num < 0)
+	{
+		num = -num;
+		ft_putchar('-', len);
+		ft_putnbr(num, len);
+	}
+	else if (num > 9)
+	{
+		ft_putnbr(num / 10, len);
+		ft_putnbr(num % 10, len);
+	}
 	else
-		ft_putchar('%', len);
+	{
+		c = num + '0';
+		ft_putchar(c, len);
+	}
 }
 
-char	*ft_strdup(const char *s1)
+void	ft_putnbr_u(unsigned int num, int *len)
 {
-	char	*dest;
-	int		s1_len;
-	int		i;
+	char	c;
 
-	s1_len = 0;
-	while (s1[s1_len])
-		s1_len++;
-	dest = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (i < s1_len)
+	if (num > 9)
 	{
-		dest[i] = s1[i];
-		i++;
+		ft_putnbr_u(num / 10, len);
+		ft_putnbr_u(num % 10, len);
 	}
-	dest[i] = '\0';
-	return (dest);
+	else
+	{
+		c = num + '0';
+		ft_putchar(c, len);
+	}
 }
