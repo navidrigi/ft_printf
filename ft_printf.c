@@ -14,7 +14,7 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			arg_checking(str, args, &len);
+			arg_checking(str[i], args, &len);
 		}
 		else
 			len += write (1, &str[i], 1);

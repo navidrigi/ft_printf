@@ -10,7 +10,7 @@
 
 int		ft_printf(const char *str, ...);
 char	*ft_strdup(const char *s1);
-void	arg_checking(const char *str, va_list args, int *len);
+void	arg_checking(char c, va_list args, int *len);
 void	ft_putchar(int c, int *len);
 void	ft_putstr(char *str, int *len);
 void	ft_puthex(int num, int *len);
